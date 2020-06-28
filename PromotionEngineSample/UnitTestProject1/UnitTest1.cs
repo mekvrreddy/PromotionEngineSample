@@ -13,5 +13,12 @@ namespace UnitTestProject1
             Order order = new Order(1, new List<Product>() { new Product("A"), new Product("A"), new Product("B") });
             Assert.AreEqual(130, PromotionManager.GetFinalPrice(order));
         }
+
+        [TestMethod]
+        public void ApplySinglePromotionOnProductA()
+        {
+            Order order = new Order(1, new List<Product>() { new Product("A"), new Product("A"), new Product("A"), new Product("A"), new Product("A"), new Product("A") });
+            Assert.AreEqual(260, PromotionManager.GetFinalPrice(order));
+        }
     }
 }
