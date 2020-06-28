@@ -25,9 +25,9 @@ namespace PromotionEngineSample
             return promotions;
         }
 
-        public static decimal GetTotalPrice(Order ord, Promotion promotion)
+        public static decimal GetTotalRebatePrice(Order ord, Promotion promotion)
         {
-            decimal promoPrice = 0M;
+            decimal rebatePrice = 0M;
 
             //get count of promoted products
             var orderpromotionproductscounut = ord.Products
@@ -48,17 +48,17 @@ namespace PromotionEngineSample
                 if (promotion.IsFixedPrice)
                 {
                     //fixed Price sceanrio 
-                    promoPrice += promotion.PromoPrice;
+                    rebatePrice += promotionallProductsSum - promotion.PromoPrice;
                 }
                 else
                 {
                     //percentage of X of total value of promotion 
-                    promoPrice += (promotion.PromoPrice) * promotionallProductsSum;
+                    rebatePrice += (promotion.PromoPrice) * promotionallProductsSum;
                 }
                 orderpromotionproductscounut -= promotionproductcount;
             }
 
-            return promoPrice;
+            return rebatePrice;
         }
     }
 }
