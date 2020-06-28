@@ -45,7 +45,7 @@ namespace PromotionEngineSample
                 .GroupBy(x => x.SKUId)
                 .Where(grp => promotion.ActivationDate <= DateTime.Now &&
                               (promotion.ObsoleteDate is null || (promotion.ObsoleteDate != null && promotion.ObsoleteDate >= DateTime.Now)) &&
-                              promotion.Products.Any(y => grp.Key == ((Product)y.Key).SKUId && grp.Count() >= y.Value))
+                              promotion.Products.Any(y => grp.Key.ToUpper() == ((Product)y.Key).SKUId && grp.Count() >= y.Value))
                 .Select(grp => grp.Count())
                 .Sum();
 
