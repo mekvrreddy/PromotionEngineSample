@@ -1,4 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PromotionEngineSample;
+using System.Collections.Generic;
 
 namespace UnitTestProject1
 {
@@ -6,8 +8,10 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ApplyNoPromotion()
         {
+            Order order = new Order(1, new List<Product>() { new Product("A"), new Product("A"), new Product("B") });
+            Assert.AreEqual(130, PromotionManager.GetFinalPrice(order));
         }
     }
 }

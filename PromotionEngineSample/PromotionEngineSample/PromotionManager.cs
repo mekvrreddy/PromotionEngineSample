@@ -4,9 +4,20 @@ using System.Linq;
 
 namespace PromotionEngineSample
 {
-    class PromotionManager
+    public class PromotionManager
     {
-        public static List<Promotion> GetActivePromotions()
+
+        public static decimal GetFinalPrice(Order order)
+        {
+            List<decimal> rebateprices = PromotionManager.GetActivePromotions()
+                    .Select(promo => PromotionManager.GetTotalRebatePrice(order, promo))
+                    .ToList();
+            decimal origprice = order.Products.Sum(x => x.UnitPrice);
+            decimal rebateprice = rebateprices.Sum();
+            return origprice - rebateprice;
+        }
+
+        private static List<Promotion> GetActivePromotions()
         {
             Dictionary<Product, int> promtion1products = new Dictionary<Product, int>();
             promtion1products.Add(new Product("A"), 3);
