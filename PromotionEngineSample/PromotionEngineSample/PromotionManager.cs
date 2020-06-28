@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PromotionEngineSample
 {
     class PromotionManager
     {
+        public static List<Promotion> GetActivePromotions()
+        {
+            Dictionary<Product, int> promtion1products = new Dictionary<Product, int>();
+            promtion1products.Add(new Product("A"), 3);
+            Dictionary<Product, int> promtion2products = new Dictionary<Product, int>();
+            promtion2products.Add(new Product("B"), 2);
+            Dictionary<Product, int> promtion3products = new Dictionary<Product, int>();
+            promtion3products.Add(new Product("C"), 1);
+            promtion3products.Add(new Product("D"), 1);
+
+            List<Promotion> promotions = new List<Promotion>(){
+                                                                new Promotion(1, promtion1products, 130, DateTime.Now.AddDays(-10),true,null),
+                                                                new Promotion(2, promtion2products, 45, DateTime.Now.AddDays(-10),true,null),
+                                                                new Promotion(3, promtion3products, 30, DateTime.Now.AddDays(-10),true,null)
+                                                              };
+
+            return promotions;
+        }
+
         public static decimal GetTotalPrice(Order ord, Promotion promotion)
         {
             decimal promoPrice = 0M;
